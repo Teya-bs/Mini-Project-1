@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox fillHeight="false" spacing="30.0" style="-fx-background-color: #C4B289;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproject2.controllers.BooksController">
+        <children>
+            <VBox prefHeight="375.0" prefWidth="288.0">
+                <children>
+                    <Text fx:id="errorMsg" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="286.13671875">
+                        <font>
+                            <Font name="Arial Bold" size="12.0" />
+                        </font>
+                    </Text>
+            <AnchorPane prefHeight="301.0" prefWidth="297.0">
+               <children>
+                            <TextField fx:id="nameFld" layoutX="102.0" layoutY="150.0" prefHeight="25.0" prefWidth="188.0" />
+                            <Label alignment="CENTER" layoutX="3.0" layoutY="-49.0" prefHeight="72.0" prefWidth="288.0" text="Book" textAlignment="CENTER" textFill="#884b0d">
+                                <font>
+                                    <Font name="Tahoma Bold" size="36.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="35.0" layoutY="151.0" text="Title:" textAlignment="CENTER" textFill="#703906">
+                                <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="34.0" layoutY="193.0" text="Page:" textFill="#603305">
+                                <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="26.0" layoutY="230.0" text="Author:" textFill="#603204">
+                                <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="pageFld" layoutX="102.0" layoutY="191.0" prefHeight="25.0" prefWidth="188.0" />
+                            <TextField fx:id="authorFld" layoutX="102.0" layoutY="227.0" prefHeight="25.0" prefWidth="188.0" />
+                  <ImageView fitHeight="118.0" fitWidth="195.0" layoutX="52.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/book-view.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="103.0" prefWidth="202.0">
+               <children>
+                            <Button fx:id="updateBtn" layoutX="216.0" layoutY="21.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #986129;" text="Update" textFill="WHITE">
+                                <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                </font>
+                  </Button>
+                            <Button fx:id="addBtn" layoutX="127.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBook" prefHeight="27.0" prefWidth="75.0" style="-fx-background-color: #986129;" text="Add" textFill="WHITE">
+                                <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                </font>
+                  </Button>
+                            <Button fx:id="deleteBtn" layoutX="126.0" layoutY="62.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="27.0" prefWidth="77.0" style="-fx-background-color: #986129;" text="Delete" textFill="WHITE">
+                                <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                </font>
+                  </Button>
+                  <Button fx:id="clearBtn" layoutX="216.0" layoutY="62.0" mnemonicParsing="false" onAction="#clearBooks" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #986129;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+                </children>
+            </VBox>
+            <TableView fx:id="booksTable" prefHeight="371.0" prefWidth="351.0">
+                <columns>
+                    <TableColumn fx:id="nameCol" prefWidth="103.99993896484375" text="Title" />
+                    <TableColumn fx:id="pageCol" prefWidth="121.33340454101562" text="Page Number" />
+                    <TableColumn fx:id="authorCol" prefWidth="106.0" text="Author" />
+                </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+            </TableView>
+        </children>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+    </HBox>
