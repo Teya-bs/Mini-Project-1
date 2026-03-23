@@ -20,7 +20,6 @@
             </Label>
             <Button fx:id="ClientsMa" layoutX="348.0" layoutY="230.0" mnemonicParsing="false" onAction="#clientsMa" prefHeight="31.0" prefWidth="239.0" text="Clients Management " textAlignment="CENTER" textFill="#864b10" />
             <Button fx:id="BooksMa" layoutX="348.0" layoutY="184.0" mnemonicParsing="false" onAction="#booksMa" prefHeight="31.0" prefWidth="239.0" text="Books Management " textAlignment="CENTER" textFill="#864b10" />
-            <Button fx:id="OrdersMa" layoutX="348.0" layoutY="184.0" mnemonicParsing="false" onAction="#ordersMa" prefHeight="31.0" prefWidth="239.0" text="Orders Management " textAlignment="CENTER" textFill="#864b10" />
             <ImageView fitHeight="364.0" fitWidth="346.0" layoutX="71.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home-view.jpg" />
