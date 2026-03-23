@@ -1,5 +1,7 @@
-package com.example.controllers;
+package com.example.miniproject2.controllers;
 
+import com.example.miniproject2.models.Book;
+import com.example.miniproject2.models.Team;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,24 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-// Simple Team model class (you can move this to its own file if needed)
-class Team {
-    private String name;
-    private String role;
-    private String email;
-
-    public Team(String name, String role, String email) {
-        this.name = name;
-        this.role = role;
-        this.email = email;
-    }
-
-    public String getName() { return name; }
-    public String getRole() { return role; }
-    public String getEmail() { return email; }
-}
 
 public class teamscontroller {
 
@@ -49,8 +36,15 @@ public class teamscontroller {
     @FXML
     private Button btnDelete;
 
-    private ObservableList<Team> teamList;
+    @FXML
+    private TextField txtName;
 
+    @FXML
+    private TextField txtRole;
+
+    @FXML
+    private TextField txtEmail;
+    private ObservableList<Team> teamList = FXCollections.observableArrayList();
     @FXML
     public void initialize() {
         // Set up columns
@@ -58,33 +52,48 @@ public class teamscontroller {
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Sample data
-        teamList = FXCollections.observableArrayList(
-                new Team("Alice", "Developer", "alice@example.com"),
-                new Team("Bob", "Designer", "bob@example.com")
-        );
 
         tableTeams.setItems(teamList);
+        tableTeams.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                txtName.setText(newSelection.getName());
+                txtRole.setText(newSelection.getRole());
+                txtEmail.setText(newSelection.getEmail());
+            }
+        });
     }
 
     @FXML
-    private void handleAdd(ActionEvent event) {
-        // Example: add a dummy team member
-        teamList.add(new Team("New Member", "Role", "email@example.com"));
-    }
+    private void addPlayer(ActionEvent event) {
+        String name = txtName.getText();
+        String role = txtRole.getText();
+        String email = txtEmail.getText();
 
-    @FXML
-    private void handleEdit(ActionEvent event) {
-        Team selected = tableTeams.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            // Example: update role
-            teamList.set(teamList.indexOf(selected),
-                    new Team(selected.getName(), "Updated Role", selected.getEmail()));
+        if (!name.isEmpty() && !role.isEmpty() && !email.isEmpty()) {
+            teamList.add(new Team(name, role, email));
+            txtName.clear();
+            txtRole.clear();
+            txtEmail.clear();
+        } else {
+            System.out.println("Please fill in all fields");
         }
     }
 
     @FXML
-    private void handleDelete(ActionEvent event) {
+    private void updatePlayer(ActionEvent event) {
+        Team selected = tableTeams.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            int index = teamList.indexOf(selected);
+            teamList.set(index, new Team(
+                    txtName.getText(),
+                    txtRole.getText(),
+                    txtEmail.getText()
+            ));
+        }
+    }
+
+    @FXML
+    private void deletePlayer(ActionEvent event) {
         Team selected = tableTeams.getSelectionModel().getSelectedItem();
         if (selected != null) {
             teamList.remove(selected);

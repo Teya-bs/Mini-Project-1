@@ -1,4 +1,4 @@
-package models;
+package com.example.miniproject2.models;
 
 public class Team {
     private String name;

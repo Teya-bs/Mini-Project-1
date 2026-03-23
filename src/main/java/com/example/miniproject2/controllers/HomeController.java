@@ -17,6 +17,8 @@ public class HomeController {
 
 
     @FXML
+    private Button teamsMa;
+    @FXML
     private Button ordersMa;
 
     @FXML
@@ -47,6 +49,16 @@ public class HomeController {
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         Stage stage = new Stage();
         stage.setTitle("Orders Management");
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void teamMa (javafx.event.ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+                .getResource("/com/example/miniproject2/views/teamsView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Teams Management");
         stage.setScene(scene);
         stage.show();
     }

@@ -18,14 +18,28 @@
                   <Font name="Bell MT Bold" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="ClientsMa" layoutX="348.0" layoutY="230.0" mnemonicParsing="false" onAction="#clientsMa" prefHeight="31.0" prefWidth="239.0" text="Clients Management " textAlignment="CENTER" textFill="#864b10" />
-            <Button fx:id="BooksMa" layoutX="348.0" layoutY="184.0" mnemonicParsing="false" onAction="#booksMa" prefHeight="31.0" prefWidth="239.0" text="Books Management " textAlignment="CENTER" textFill="#864b10" />
-            <Button fx:id="OrdersMa" layoutX="348.0" layoutY="277.0" mnemonicParsing="false" onAction="#ordersMa" prefHeight="31.0" prefWidth="239.0" text="Orders Management " textAlignment="CENTER" textFill="#864b10" />
+            <Button fx:id="ClientsMa" layoutX="348.0" layoutY="230.0" mnemonicParsing="false" onAction="#clientsMa" prefHeight="31.0" prefWidth="239.0" text="Clients Management " textAlignment="CENTER" textFill="#864b10">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Button>
+            <Button fx:id="BooksMa" layoutX="348.0" layoutY="184.0" mnemonicParsing="false" onAction="#booksMa" prefHeight="31.0" prefWidth="239.0" text="Books Management " textAlignment="CENTER" textFill="#864b10">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Button>
+            <Button fx:id="OrdersMa" layoutX="348.0" layoutY="277.0" mnemonicParsing="false" onAction="#ordersMa" prefHeight="31.0" prefWidth="239.0" text="Orders Management " textAlignment="CENTER" textFill="#864b10">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Button>
             <ImageView fitHeight="364.0" fitWidth="346.0" layoutX="71.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home-view.jpg" />
                </image>
             </ImageView>
+            <Button fx:id="TeamMa" layoutX="348.0" layoutY="324.0" mnemonicParsing="false" onAction="#teamMa" prefHeight="27.0" prefWidth="239.0" text="Teams Management" textAlignment="CENTER" textFill="#864b10">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </center>
