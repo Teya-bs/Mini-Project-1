@@ -1,5 +1,7 @@
-package com.example.miniproject2;
+package com.example.miniproject2.controllers;
 
+import com.example.miniproject2.models.Order;
+import com.example.miniproject2.models.OrdersStore;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

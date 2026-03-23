@@ -1,4 +1,4 @@
-package com.example.miniproject2;
+package com.example.miniproject2.models;
 
 import javafx.beans.property.*;
 

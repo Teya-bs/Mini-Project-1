@@ -18,6 +18,8 @@ module com.example.miniproject2 {
     exports com.example.miniproject2;
     opens com.example.miniproject2.controllers to javafx.fxml;
     opens com.example.miniproject2.views to javafx.fxml;
-    opens com.example.miniproject2.models to javafx.base;
+    exports com.example.miniproject2.controllers;
+    exports com.example.miniproject2.models;
+    opens com.example.miniproject2.models to javafx.base, javafx.fxml;
 
 }
