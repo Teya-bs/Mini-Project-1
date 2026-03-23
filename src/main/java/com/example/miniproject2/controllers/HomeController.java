@@ -15,7 +15,7 @@ public class HomeController {
     @FXML
     private Button ClientsMa;
     @FXML
-    private Button OrdesMa;
+    private Button ordesMa;
 
     @FXML
     public void booksMa(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -39,7 +39,7 @@ public class HomeController {
         stage.show();
     }
     @FXML
-    public void OrdersMa(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void ordersMa(javafx.event.ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                 .getResource("/com/example/miniproject2/orders-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
