@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.miniproject2.controllers.ClientsController"
+      alignment="CENTER"
+      spacing="20"
+      style="-fx-background-color: linear-gradient(to right, #3b82f6, #ef4444);">
+
+    <padding>
+        <Insets top="45" right="80" bottom="45" left="80"/>
+    </padding>
+
+    <HBox spacing="0"
+          maxWidth="1050" prefWidth="1050" prefHeight="580"
+          style="-fx-background-color: white; -fx-background-radius: 24; -fx-border-radius: 24;">
+
+        <!-- LEFT PANEL -->
+        <VBox spacing="16" prefWidth="330"
+              style="-fx-background-color: #f8fafc; -fx-background-radius: 24 0 0 24;">
+            <padding>
+                <Insets top="28" right="24" bottom="28" left="24"/>
+            </padding>
+
+            <Label text="Clients"
+                   style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #1e3a8a;" />
+
+            <Label text="Manage your clients easily"
+                   style="-fx-font-size: 16px; -fx-text-fill: #64748b;" />
+
+            <Region prefHeight="6"/>
+
+            <Label text="Client ID"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #334155;" />
+            <TextField fx:id="idField"
+                       promptText="Enter client ID"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 11; -fx-font-size: 14px;" />
+
+            <Label text="Client Name"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #334155;" />
+            <TextField fx:id="nameField"
+                       promptText="Enter client name"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 11; -fx-font-size: 14px;" />
+
+            <Label text="Phone"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #334155;" />
+            <TextField fx:id="phoneField"
+                       promptText="Enter client phone"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 11; -fx-font-size: 14px;" />
+
+            <Label text="Email"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #334155;" />
+            <TextField fx:id="emailField"
+                       promptText="Enter client email"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 11; -fx-font-size: 14px;" />
+        </VBox>
+
+        <!-- RIGHT PANEL -->
+        <VBox spacing="14" prefWidth="720"
+              style="-fx-background-color: white; -fx-background-radius: 0 24 24 0;">
+            <padding>
+                <Insets top="30" right="28" bottom="30" left="38"/>
+            </padding>
+
+            <Label text="Clients Management"
+                   style="-fx-font-size: 31px; -fx-font-weight: bold; -fx-text-fill: #1e3a8a;" />
+
+            <Label text="Clients list"
+                   style="-fx-font-size: 15px; -fx-text-fill: #64748b;" />
+
+            <TableView fx:id="clientsTable"
+                       prefHeight="420"
+                       prefWidth="600"
+                       maxWidth="600"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12;">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="85"/>
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="160"/>
+                    <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="150"/>
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="205"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Add"
+                        onAction="#addClient"
+                        style="-fx-background-color:#3b82f6; -fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 18;" />
+
+                <Button text="Update"
+                        onAction="#updateClient"
+                        style="-fx-background-color:#2563eb; -fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 18;" />
+
+                <Button text="Delete"
+                        onAction="#deleteClient"
+                        style="-fx-background-color:#ef4444; -fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 18;" />
+
+                <Button text="Clear"
+                        onAction="#clearFields"
+                        style="-fx-background-color:#f97316; -fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 18;" />
+            </HBox>
+        </VBox>
+
+    </HBox>
+</VBox>
