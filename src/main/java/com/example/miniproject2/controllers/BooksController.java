@@ -52,7 +52,7 @@ public class BooksController{
 
     private final BooksStore bookStore = new BooksStore();
 
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -60,7 +60,7 @@ public class BooksController{
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
 
         //ObservableList<Book> books = bookStore.getBooksList();
-        booksTable.setItems(bookList);
+        booksTable.setItems(bookStore.getBooksList());
 
         booksTable.getSelectionModel().selectedItemProperty().addListener(evt -> {
             Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
@@ -104,8 +104,6 @@ public class BooksController{
 
         if(isValid) {
             bookStore.addBook(new Book(name, page, author));
-            Book newBook = new Book(name, page, author);
-            bookList.add(newBook);
             nameFld.setText("");
             pageFld.setText("");
             authorFld.setText("");
@@ -121,8 +119,8 @@ public class BooksController{
         Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
 
         if(selectedBook != null) {
-            booksTable.getItems().remove(selectedBook);
-
+            //booksTable.getItems().remove(selectedBook);
+            bookStore.deleteBook(selectedBook);
         }
     }
     @FXML
@@ -132,7 +130,7 @@ public class BooksController{
         pageFld.setText("");
         authorFld.setText("");
         errorMsg.setText("");
-        bookList.clear();
+        bookStore.getBooksList().clear();
     }
 
     @FXML

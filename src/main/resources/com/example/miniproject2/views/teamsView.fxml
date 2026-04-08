@@ -12,34 +12,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="428.0" prefWidth="831.0" spacing="30.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.miniproject2.controllers.teamscontroller">
+<HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="428.0" prefWidth="831.0" spacing="30.0" style="-fx-background-color: #F0F8FF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproject2.controllers.teamscontroller">
     <children>
-        <TableView fx:id="tableTeams" prefHeight="387.0" prefWidth="418.0">
+        <TableView fx:id="playerTable" prefHeight="387.0" prefWidth="418.0">
             <columns>
-                <TableColumn fx:id="colName" prefWidth="113.33330726623535" text="Name" />
-                <TableColumn fx:id="colRole" prefWidth="137.99998474121094" text="Role" />
-                <TableColumn fx:id="colEmail" prefWidth="202.0" text="Email" />
+                <TableColumn fx:id="nameCol" prefWidth="113.33330726623535" text="Name" />
+                <TableColumn fx:id="roleCol" prefWidth="137.99998474121094" text="Role" />
+                <TableColumn fx:id="emailCol" prefWidth="202.0" text="Email" />
             </columns>
         </TableView>
       <AnchorPane prefHeight="292.0" prefWidth="253.0">
          <children>
             <AnchorPane layoutX="67.0" layoutY="106.0" prefHeight="286.0" prefWidth="301.0">
                <children>
-                        <Button fx:id="btnDelete" layoutX="190.0" layoutY="233.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Delete" textFill="WHITE">
+                        <Button fx:id="deleteBtn" layoutX="190.0" layoutY="233.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Delete" textFill="WHITE">
                             <font>
                                 <Font name="Arial Bold" size="12.0" />
                             </font>
                   </Button>
-                        <Button fx:id="btnEdit" layoutX="67.0" layoutY="233.0" mnemonicParsing="false" onAction="#updatePlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Update" textFill="WHITE">
+                        <Button fx:id="updateBtn" layoutX="67.0" layoutY="233.0" mnemonicParsing="false" onAction="#updatePlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Update" textFill="WHITE">
                             <font>
                                 <Font name="Arial Bold" size="12.0" />
                             </font>
                   </Button>
-
-                  <TextField fx:id="txtRole" layoutX="67.0" layoutY="130.0" promptText="Enter his role" />
-                  <TextField fx:id="txtEmail"  layoutX="67.0" layoutY="179.0" promptText="Enter his email" />
-                  <TextField fx:id="txtName" layoutX="67.0" layoutY="87.0" promptText="Enter Player name" />
+                  <TextField layoutX="67.0" layoutY="130.0" promptText="Enter his role" />
+                  <TextField layoutX="67.0" layoutY="179.0" promptText="Enter his email" />
+                  <TextField layoutX="67.0" layoutY="87.0" promptText="Enter Player name" />
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/soccer view.jpg" />
@@ -62,7 +60,7 @@
                   </Label>
                </children>
             </AnchorPane>
-                  <Button fx:id="btnAdd" layoutX="14.0" layoutY="340.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Insert" textFill="WHITE">
+                  <Button fx:id="addBtn" layoutX="14.0" layoutY="340.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #95C8D8;" text="Insert" textFill="WHITE">
                       <font>
                           <Font name="Arial Bold" size="12.0" />
                       </font>
