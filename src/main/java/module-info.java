@@ -3,7 +3,7 @@ module com.example.miniproject2 {
     requires javafx.graphicsEmpty;
     requires javafx.fxml;
     requires javafx.web;
-
+    requires java.sql;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
