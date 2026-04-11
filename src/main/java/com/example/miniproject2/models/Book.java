@@ -9,12 +9,16 @@ public class Book  {
         private final SimpleStringProperty name;
         private final SimpleIntegerProperty page;
         private final SimpleStringProperty author;
+
         public Book(String name, int page, String author) {
             this.name = new SimpleStringProperty(name);
             this.page = new SimpleIntegerProperty(page);
             this.author = new SimpleStringProperty(author);
         }
-        public String getName() {
+
+
+
+    public String getName() {
             return name.get();
         }
         public void setName(String name) {

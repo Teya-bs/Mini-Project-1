@@ -1,6 +1,7 @@
 package com.example.miniproject2.controllers;
 
 import com.example.miniproject2.CRUD;
+import com.example.miniproject2.DBConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,52 +14,52 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
+
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-public class LoginController{
-    public  LoginController(){
+public class LoginController {
 
-    }
-    @FXML
-    private Button button;
-    @FXML
-    private Label wrongLogin;
     @FXML
     private PasswordField password;
     @FXML
     private TextField username;
+    @FXML
+    private Label wrongLogin;
 
-     public void userLogin(javafx.event.ActionEvent actionEvent) throws IOException {
-        checkLogin();
-
-    }
-
-    private void checkLogin() throws IOException {
-
-        if(username.getText().toString().equals("Teya-bs") && password.getText().toString().equals("333")){
-            wrongLogin.setText("Success!");
-            CRUD.changeScene("/com/example/miniproject2/views/home-view.fxml");
-
-        }
-        else if(username.getText().toString().equals("AlvinA") && password.getText().toString().equals("960")){
-            wrongLogin.setText("Success!");
-            CRUD.changeScene("/com/example/miniproject2/views/home-view.fxml");
-        }
-        else if(username.getText().toString().equals("HibaC") && password.getText().toString().equals("555")){
-            wrongLogin.setText("Success!");
-            CRUD.changeScene("/com/example/miniproject2/views/home-view.fxml");
-        }
-        else if(username.getText().toString().equals("Josee") && password.getText().toString().equals("534")){
-          wrongLogin.setText("Success!");
-            CRUD.changeScene("/com/example/miniproject2/views/home-view.fxml");
-        }
-        else if(username.getText().isEmpty() && password.getText().isEmpty()){
-            wrongLogin.setText("Please enter your data.");
-        }
-        else{
-            wrongLogin.setText("Wrong username or password!");
+    // Your existing boolean login logic
+    public boolean login(String username, String password) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "SELECT * FROM accounts WHERE username='"
+                    + username + "' AND password='" + password + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            boolean valid = rs.next();
+            rs.close();
+            stmt.close();
+            conn.close();
+            return valid;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
         }
     }
 
+    @FXML
+    public void userLogin(javafx.event.ActionEvent actionEvent) throws IOException  {
+        String usernamee = username.getText();
+        String passwordd = password.getText();
 
+        boolean success = login(usernamee, passwordd);
+
+        if (success) {
+            wrongLogin.setText("Login successful!");
+            CRUD.changeScene("/com/example/miniproject2/views/home-view.fxml");
+        } else {
+            wrongLogin.setText("Login failed. Try again.");
+        }
+    }
 }

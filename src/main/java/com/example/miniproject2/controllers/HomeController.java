@@ -23,6 +23,7 @@ public class HomeController {
 
     @FXML
     public void booksMa(javafx.event.ActionEvent actionEvent) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                 .getResource("/com/example/miniproject2/views/books-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);

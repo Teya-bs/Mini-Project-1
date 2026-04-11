@@ -1,182 +1,111 @@
+
 package com.example.miniproject2.controllers;
 
 import com.example.miniproject2.models.Book;
 import com.example.miniproject2.models.BooksStore;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 
+public class BooksController {
 
-public class BooksController{
-    @FXML
-    private Button addBtn;
+    @FXML private TableView<Book> booksTable;
+    @FXML private TableColumn<Book, String> nameCol;
+    @FXML private TableColumn<Book, Integer> pageCol;
+    @FXML private TableColumn<Book, String> authorCol;
 
-    @FXML
-    private TableColumn<Book, String> authorCol;
+    @FXML private TextField nameFld;
+    @FXML private TextField pageFld;
+    @FXML private TextField authorFld;
 
-    @FXML
-    private TextField authorFld;
-
-    @FXML
-    private TableColumn<Book, Number> pageCol;
-
-    @FXML
-    private TextField pageFld;
-
-    @FXML
-    private Button deleteBtn;
-
-    @FXML
-    private TableColumn<Book, String> nameCol;
-
-    @FXML
-    private TextField nameFld;
-
-    @FXML
-    private TableView<Book> booksTable;
-
-    @FXML
-    private Button updateBtn;
-
-    @FXML
-    private Button clearBtn;
-
-    @FXML
-    private Text errorMsg;
-
-    private final BooksStore bookStore = new BooksStore();
-
+    private BooksStore booksStore = new BooksStore();
 
     @FXML
     public void initialize() {
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        pageCol.setCellValueFactory(new PropertyValueFactory<>("page"));
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        // Bind columns to Book properties
+        nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        pageCol.setCellValueFactory(cellData -> cellData.getValue().pageProperty().asObject());
+        authorCol.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
 
-        //ObservableList<Book> books = bookStore.getBooksList();
-        booksTable.setItems(bookStore.getBooksList());
-
-        booksTable.getSelectionModel().selectedItemProperty().addListener(evt -> {
-            Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
-            if(selectedBook != null) {
-                nameFld.setText(selectedBook.getName());
-                pageFld.setText(Integer.toString(selectedBook.getPage()));
-                authorFld.setText(selectedBook.getAuthor());
+        // Load initial data
+        refreshTable();
+        booksTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                nameFld.setText(newSelection.getName());
+                pageFld.setText(String.valueOf(newSelection.getPage()));
+                authorFld.setText(newSelection.getAuthor());
             }
         });
+    }
 
+    private void refreshTable() {
+        ObservableList<Book> books = booksStore.getBooksList();
+        booksTable.setItems(books);
     }
 
     @FXML
-    void addBook(ActionEvent event) {
-        String error = "";
-        boolean isValid = true;
-
-        String name = nameFld.getText();
-        if(name.isEmpty()) {
-            error += "Error: Name is required\n";
-            isValid = false;
-        }
-
-        Integer page = null;
-        if(pageFld.getText().isEmpty()) {
-            error += "Error: Page number is required\n";
-            isValid = false;
-        }
-        else try {
-            page = Integer.parseInt(pageFld.getText());
-        }catch(NumberFormatException ex){
-            error += "Error: Invalid page value!\n";
-            isValid = false;
-        }
-
-        String author = authorFld.getText();
-        if(author.isEmpty()) {
-            error += "Error: Author name is required\n";
-            isValid = false;
-        }
-
-        if(isValid) {
-            bookStore.addBook(new Book(name, page, author));
-            nameFld.setText("");
-            pageFld.setText("");
-            authorFld.setText("");
-            errorMsg.setText("");
-        }
-        else
-            errorMsg.setText(error);
-
-    }
-
-    @FXML
-    void deleteBook(ActionEvent event) {
-        Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
-
-        if(selectedBook != null) {
-            //booksTable.getItems().remove(selectedBook);
-            bookStore.deleteBook(selectedBook);
-        }
-    }
-    @FXML
-    void clearBooks(ActionEvent event) {
-        bookStore.getBooksList().clear();
-        nameFld.setText("");
-        pageFld.setText("");
-        authorFld.setText("");
-        errorMsg.setText("");
-        bookStore.getBooksList().clear();
-    }
-
-    @FXML
-    void updateBook(ActionEvent event) {
-
-        Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
-
-        if(selectedBook != null)
-        {
-            String error = "";
-            boolean isValid = true;
-
-            String name = nameFld.getText();
-            if(name.isEmpty()) {
-                error += "Error: Name is required!\n";
-                isValid = false;
-            }
-
-            Integer page = null;
-            if(pageFld.getText().isEmpty()){
-                error += "Error: Page number is required!\n";
-                isValid = false;
-            }
-            else try {
-                page = Integer.parseInt(pageFld.getText());
-            }catch(NumberFormatException ex){
-                error += "Error: Invalid page value!\n";
-                isValid = false;
-            }
-
+    public void addBook() {
+        try {
+            String title = nameFld.getText();
+            int pages = Integer.parseInt(pageFld.getText());
             String author = authorFld.getText();
-            if(author.isEmpty()){
-                error += "Error: Address is required!";
-            }
 
-            if(isValid) {
-                bookStore.updateBook(selectedBook, name, page, author);
-                errorMsg.setText("");
-            }
-            else
-                errorMsg.setText(error);
+            Book newBook = new Book(title, pages, author);
+            booksStore.addBook(newBook);
 
+            // Update table
+            refreshTable();
+            clearBooks();
+        } catch (NumberFormatException e) {
+            showAlert("Pages must be a number.");
         }
-
     }
 
+    @FXML
+    public void deleteBook() {
+        Book selected = booksTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            booksStore.deleteBook(selected);
+            refreshTable();
+        } else {
+            showAlert("Please select a book to delete.");
+        }
+    }
+
+    @FXML
+    public void updateBook() {
+        Book selected = booksTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            try {
+                String newTitle = nameFld.getText();
+                int newPages = Integer.parseInt(pageFld.getText());
+                String newAuthor = authorFld.getText();
+
+                booksStore.updateBook(selected, newTitle, newPages, newAuthor);
+                refreshTable();
+                clearBooks();
+            } catch (NumberFormatException e) {
+                showAlert("Pages must be a number.");
+            }
+        } else {
+            showAlert("Please select a book to update.");
+        }
+    }
+
+    @FXML
+    private void clearBooks() {
+        nameFld.clear();
+        pageFld.clear();
+        authorFld.clear();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
 
 
