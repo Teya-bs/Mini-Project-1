@@ -9,7 +9,7 @@ public class OrdersStore {
 
     private static final String URL  = "jdbc:mysql://localhost:3306/workshopidb";
     private static final String USER = "root";
-    private static final String PASS = "123456"; // change to your password
+    private static final String PASS = "root1232006"; // change to your password
 
     private Connection connect() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");

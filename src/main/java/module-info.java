@@ -13,7 +13,6 @@ module com.example.miniproject2 {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires jdk.compiler;
-    requires java.sql;
 
     opens com.example.miniproject2 to javafx.fxml;
     exports com.example.miniproject2;
