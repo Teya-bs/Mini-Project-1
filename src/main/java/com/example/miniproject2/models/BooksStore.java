@@ -1,111 +1,79 @@
+
 package com.example.miniproject2.models;
 
 import com.example.miniproject2.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.*;
-import java.util.ArrayList;
-
 
 public class BooksStore {
 
-   public ObservableList<Book> getBooksList() {
-       ObservableList<Book> books = FXCollections.observableArrayList();
+    public ObservableList<Book> getBooksList() {
+        ObservableList<Book> books = FXCollections.observableArrayList();
+        String sql = "SELECT title, pages, author FROM books";
 
-       try {
-           Connection con = DBConnection.getConnection();
-           String query = "SELECT * FROM books";
-           Statement st = con.createStatement();
-           ResultSet rs = st.executeQuery(query);
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-           while (rs.next()) {
-               books.add(new Book(
-                       rs.getString("title"),
-                       rs.getInt("pages"),
-                       rs.getString("author")
-               ));
-           }
-
-           con.close();
-
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-
-       return books;
-   }
-    public void addBook(Book book){
-        try {
-            Connection con = DBConnection.getConnection();
-
-            String query = "INSERT INTO books(title, pages, author) VALUES (?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(query);
-
-            ps.setString(1, book.getName());
-            ps.setInt(2, book.getPage());
-            ps.setString(3, book.getAuthor());
-
-            ps.executeUpdate();
-            con.close();
-
-        } catch (Exception e) {
+            while (rs.next()) {
+                books.add(new Book(
+                        rs.getString("title"),
+                        rs.getInt("pages"),
+                        rs.getString("author")
+                ));
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return books;
+    }
+
+    public void addBook(Book book) {
+        String sql = "INSERT INTO books (title, pages, author) VALUES (?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, book.getName());
+            pstmt.setInt(2, book.getPage());
+            pstmt.setString(3, book.getAuthor());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-    public void deleteBook(Book book){
-        try {
-            Connection con = DBConnection.getConnection();
 
-            String query = "DELETE FROM books WHERE title=? AND pages=? AND author=?";
-            PreparedStatement ps = con.prepareStatement(query);
-
-            ps.setString(1, book.getName());
-            ps.setInt(2, book.getPage());
-            ps.setString(3, book.getAuthor());
-
-            ps.executeUpdate();
-            con.close();
-
-        } catch (Exception e) {
+    public void deleteBook(Book book) {
+        String sql = "DELETE FROM books WHERE title = ? AND author = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, book.getName());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-    public void updateBook(Book book, String name, Integer page, String author){
-        try {
-            Connection con = DBConnection.getConnection();
 
-            String query = "UPDATE books SET title=?, pages=?, author=? WHERE title=? AND pages=? AND author=?";
-            PreparedStatement ps = con.prepareStatement(query);
-
-            // new values
-            ps.setString(1, name);
-            ps.setInt(2, page);
-            ps.setString(3, author);
-
-            // old values
-            ps.setString(4, book.getName());
-            ps.setInt(5, book.getPage());
-            ps.setString(6, book.getAuthor());
-
-            ps.executeUpdate();
-            con.close();
-
-        } catch (Exception e) {
+    public void updateBook(Book book, String newTitle, int newPages, String newAuthor) {
+        String sql = "UPDATE books SET title = ?, pages = ?, author = ? WHERE title = ? AND author = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newTitle);
+            pstmt.setInt(2, newPages);
+            pstmt.setString(3, newAuthor);
+            pstmt.setString(4, book.getName());
+            pstmt.setString(5, book.getAuthor());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-    public void deleteAllBooks() {
-        try (Connection con = DBConnection.getConnection();
-             Statement st = con.createStatement()) {
-            String query = "DELETE FROM books";
-            st.executeUpdate(query);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
-
-
-
-
-

@@ -14,6 +14,7 @@ module com.example.miniproject2 {
     requires java.desktop;
     requires jdk.compiler;
 
+
     opens com.example.miniproject2 to javafx.fxml;
     exports com.example.miniproject2;
     opens com.example.miniproject2.controllers to javafx.fxml;

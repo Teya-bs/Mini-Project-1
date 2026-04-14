@@ -22,13 +22,12 @@ public class BooksController {
 
     @FXML
     public void initialize() {
-        // Bind columns to Book properties
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         pageCol.setCellValueFactory(cellData -> cellData.getValue().pageProperty().asObject());
         authorCol.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
 
-        // Load initial data
         refreshTable();
+
         booksTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 nameFld.setText(newSelection.getName());
@@ -53,7 +52,6 @@ public class BooksController {
             Book newBook = new Book(title, pages, author);
             booksStore.addBook(newBook);
 
-            // Update table
             refreshTable();
             clearBooks();
         } catch (NumberFormatException e) {
@@ -107,6 +105,3 @@ public class BooksController {
         alert.showAndWait();
     }
 }
-
-
-
