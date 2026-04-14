@@ -1,4 +1,4 @@
-module com.example.miniproject2 {
+module com.example.miniproject2{
     requires javafx.controls;
     requires javafx.graphicsEmpty;
     requires javafx.fxml;
